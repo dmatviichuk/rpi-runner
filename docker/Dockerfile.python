@@ -11,7 +11,7 @@ RUN \
     pip install --no-cache-dir --upgrade pip setuptools wheel && \
     pip install --no-cache-dir restricted_pkg && \
     pip install --no-cache-dir pip-tools && \
-    pip install --force-reinstall --no-cache-dir -r /tmp/requirements/$REQUIREMENTS_FILE
+    pip install --force-reinstall --no-cache-dir -r /tmp/requirements/base.txt
     
 ENV PYTHONPATH "${PYTHONPATH}:/"
 
