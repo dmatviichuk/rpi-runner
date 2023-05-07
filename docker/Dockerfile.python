@@ -16,7 +16,6 @@ RUN \
 ENV PYTHONPATH "${PYTHONPATH}:/"
 
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN sed -i "s/PORTVAL/$PORT/g" /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["sh", "/usr/local/bin/entrypoint.sh"]
