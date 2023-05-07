@@ -10,6 +10,16 @@ jobs:
   setup:
     runs-on: self-hosted
     steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: "false"
+          fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: pip
       - name: Echo
         id: echostep
         run: |
