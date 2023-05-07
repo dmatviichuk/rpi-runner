@@ -15,12 +15,8 @@ jobs:
         with:
           persist-credentials: "false"
           fetch-depth: 0
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-          cache: pip
-      - name: Echo
-        id: echostep
+      - name: Docker build
+        id: dockerbuild
         run: |
-          echo "Test on RPi"
+          docker build -f docker/Dockerfile.python --no-cache -t test:$GITHUB_RUN_NUMBER .
+          docker image rm test:$GITHUB_RUN_NUMBER
