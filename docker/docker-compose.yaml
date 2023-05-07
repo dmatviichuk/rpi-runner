@@ -17,7 +17,3 @@ services:
       - 90:80
     depends_on:
       - app
-
-networks:
-  app:
-  nginx:
