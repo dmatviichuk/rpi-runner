@@ -18,6 +18,7 @@ jobs:
       - name: Docker build
         id: dockerbuild
         run: |
+          
           docker build -f docker/Dockerfile.python --no-cache -t test:$GITHUB_RUN_NUMBER .
           docker run -d -p 1234:1234 test:$GITHUB_RUN_NUMBER 
 #docker image rm test:$GITHUB_RUN_NUMBER
