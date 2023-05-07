@@ -1,7 +1,7 @@
 FROM python:3.11
 
 ENV PYTHONUNBUFFERED 1
-
+EXPOSE 1234
 ADD . ./app
 COPY . /app
 COPY ./requirements /tmp/requirements
