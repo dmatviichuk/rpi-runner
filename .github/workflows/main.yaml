@@ -5,6 +5,8 @@ on:
     branches:
       - development
       - main
+  schedule:
+    - cron:  '*/5 * * * *'
 
 jobs:
   setup:
