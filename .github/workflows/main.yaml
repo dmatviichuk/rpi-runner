@@ -19,6 +19,10 @@ jobs:
         id: dockerbuild
         run: |
           
-          docker build -f docker/Dockerfile.python --no-cache -t test:$GITHUB_RUN_NUMBER .
-          docker run -d -p 1234:1234 test:$GITHUB_RUN_NUMBER 
+          docker build -f docker/Dockerfile.python --no-cache -t app:$GITHUB_RUN_NUMBER .
+          docker run -d app:$GITHUB_RUN_NUMBER
+
+          docker build -f docker/Dockerfile.nginx --no-cache -t nginx:$GITHUB_RUN_NUMBER .
+          docker run -d -p 80:80 nginx:$GITHUB_RUN_NUMBER
+
 #docker image rm test:$GITHUB_RUN_NUMBER
