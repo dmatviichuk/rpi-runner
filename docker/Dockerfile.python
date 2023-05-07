@@ -1,1 +1,22 @@
 FROM python:3.11
+
+ENV PYTHONUNBUFFERED 1
+
+ADD . ./app
+COPY . /app
+COPY ./requirements /tmp/requirements
+WORKDIR /app
+
+RUN \
+    pip install --no-cache-dir --upgrade pip setuptools wheel && \
+    pip install --no-cache-dir restricted_pkg && \
+    pip install --no-cache-dir pip-tools && \
+    pip install --force-reinstall --no-cache-dir -r /tmp/requirements/$REQUIREMENTS_FILE
+    
+ENV PYTHONPATH "${PYTHONPATH}:/"
+
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN sed -i "s/PORTVAL/$PORT/g" /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["sh", "/usr/local/bin/entrypoint.sh"]
