@@ -18,9 +18,15 @@ jobs:
       - name: Docker build
         id: dockerbuild
         run: |
-          docker kill $(docker ps -q)
-          docker rm $(docker ps -a -q)
-          docker rmi $(docker images -q)
+          cont=$(docker ps -q)
+          if [ -z "$cont" ]
+          then
+                echo "Nothing to remove..."
+          else
+            docker kill $(docker ps -q)
+            docker rm $(docker ps -a -q)
+            docker rmi $(docker images -q)
+          fi
 
           docker build -f docker/Dockerfile.python --no-cache -t app:$GITHUB_RUN_NUMBER .
           docker run -d -p 1234:1234 app:$GITHUB_RUN_NUMBER
