@@ -23,8 +23,10 @@ jobs:
           then
                 echo "Nothing to remove..."
           else
-            docker kill $(docker ps -q)
-            docker rm $(docker ps -a -q)
-            docker rmi $(docker images -q)
+            echo "Remove old containers..."
+            docker kill $cont
+            docker rm $cont
+            docker rmi $cont
           fi
-          docker compose -f docker/docker-compose.yaml up -d
+          docker compose -f docker/docker-compose.yaml build --no-cache
+          docker compose -f docker/docker-compose.yaml start
