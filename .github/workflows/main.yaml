@@ -1,0 +1,16 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - development
+      - main
+
+jobs:
+  setup:
+    runs-on: self-hosted
+    steps:
+      - name: Echo
+        id: echostep
+        run: |
+          echo "Test on RPi"
