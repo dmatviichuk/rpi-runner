@@ -3,18 +3,18 @@ services:
   app:
     build:
       context: ../
+      dockerfile: docker/Dockerfile.python
     expose:
       - 1234
 
   nginx:
-    image: nginx
     links:
-      - app
+      - app:app
     build:
       context: ../
-      dockerfile: Dockerfile.nginx
+      dockerfile: docker/Dockerfile.nginx
     ports:
-      - 90:90
+      - 90:80
     depends_on:
       - app
 
