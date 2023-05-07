@@ -27,8 +27,8 @@ jobs:
           else
             echo "Remove old containers..."
             docker kill $(docker ps -q)
-            docker rm $(docker ps -q)
-            docker rmi $(docker ps -q)
+            docker rm $(docker ps -aq)
+            docker rmi $(docker images -a -q)
           fi
           docker compose -f docker/docker-compose.yaml up -d --force-recreate     
           docker builder prune -a -f
